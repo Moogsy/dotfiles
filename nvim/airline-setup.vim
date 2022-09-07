@@ -1,0 +1,9 @@
+let g:airline_detect_modified=1 
+let g:airline_detect_paste=1 
+let g:airline_detect_crypt=1
+let g:airline_detect_spell=1
+let g:airline_detect_spelllang=1
+let g:vim_json_syntax_conceal = 0
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
+let g:airline_theme='badwolf'

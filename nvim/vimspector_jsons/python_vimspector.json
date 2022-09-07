@@ -1,0 +1,27 @@
+{
+    "configurations": {
+        "Python": {
+            "adapter": "debugpy",
+            "filetypes": ["python"],
+            "default": true,
+
+            "variables": {
+                "MyPythonPath": {"shell": "which python3"}
+            },
+
+            "configuration": {
+                "cwd": "${cwd}",
+                "program": "${file}",
+                "request": "launch",
+                "stopOnEntry": true,
+                "python": "${MyPythonPath}"
+            },
+
+            "breakpoints": {
+                "caught": "",
+                "uncaught": "",
+                "userUnhandled": ""
+            }
+        }
+    }
+}

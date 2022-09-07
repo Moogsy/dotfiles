@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/home/moogs'
+let g:netrw_dirhist_3='/home/moogs/GitHub'
+let g:netrw_dirhist_2='/home/moogs/GitHub/async_queue'
+let g:netrw_dirhist_1='/home/moogs/GitHub/async_queue/async_queue'
+let g:netrw_dirhist_0='/home/moogs'
+let g:netrw_dirhist_9='/home/moogs/.config'
+let g:netrw_dirhist_8='/home/moogs/.config/nvim'
+let g:netrw_dirhist_7='/home/moogs/GitHub/async_queue/async_queue'
+let g:netrw_dirhist_6='/home/moogs/GitHub/async_queue'
+let g:netrw_dirhist_5='/home/moogs/GitHub'
