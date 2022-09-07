@@ -62,22 +62,22 @@ let g:semshi#excluded_hl_groups = []
 let g:semshi#simplify_markup = v:false
 
 " Color theme
-colorscheme mfantasy
+source ~/GitHub/dotfiles/nvim/colors/mfantasy.vim
 
 " Autcompletion config
-source ~/.config/nvim/coc_config.vim
+source ~/GitHub/dotfiles/nvim/coc_config.vim
 
 " Airline stuff
-source ~/.config/nvim/airline-setup.vim
+source ~/GitHub/dotfiles/nvim/airline-setup.vim
 
 " Netrw setup
-source ~/.config/nvim/netrw-setup.vim
+source ~/GitHub/dotfiles/nvim/netrw-setup.vim
 
 " Vimspector setup
-source ~/.config/nvim/vimspector-setup.vim
+source ~/GitHub/dotfiles/nvim/vimspector-setup.vim
 
 " Custom commands
-source ~/.config/nvim/custom_commands.vim
+source ~/GitHub/dotfiles/nvim/custom_commands.vim
 
 " Have to call that one last to remove a grey bar on the left
 set signcolumn=no
