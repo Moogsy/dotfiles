@@ -2,6 +2,10 @@
 set t_8f=\e[38;2;%lu;%lu;%lum
 set t_8b=\e[48;2;%lu;%lu;%lum
 
+if !empty(glob("~/Programs/node-v18.8.0-linux-x64/bin/node"))
+    let g:coc_node_path = "~/Programs/node-v18.8.0-linux-x64/bin/node"
+endif
+
 call plug#begin()
 Plug 'Yggdroot/indentline'
 Plug 'joshdick/onedark.vim'
