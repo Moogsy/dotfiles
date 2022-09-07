@@ -63,7 +63,7 @@ alias zshrc='nvim ~/.zshrc; source ~/.zshrc'
 # alias nvimrc='nvim ~/.config/nvim/init.vim'
 
 # Use github-synced configuration for neovim
-alias nvim='nvim ~/GitHub/dotfiles/nvim/init.vim'
+alias nvim='nvim -u ~/GitHub/dotfiles/nvim/init.vim'
 
 # Compilers / interpreters
 alias py='python3'
@@ -71,6 +71,10 @@ alias gcc='gcc -Wall'
 
 # Fixes cargo's failed to authenticate issue
 CARGO_NET_GIT_FETCH_WITH_CLI=true
+
+if [[ '~/Programs/nvim-linux64/bin/nvim' ]]; then
+    alias nvim='~/Programs/nvim-linux64/bin/nvim'
+fi
 
 
 
