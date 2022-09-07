@@ -58,12 +58,10 @@ alias cls='clear'
 # Add some default arguments
 alias ls='ls --color'
 
-# Configuration files
-alias zshrc='nvim ~/.zshrc; source ~/.zshrc'
-# alias nvimrc='nvim ~/.config/nvim/init.vim'
 
-# Use github-synced configuration for neovim
+# Editor stuff
 alias nvim='nvim -u ~/GitHub/dotfiles/nvim/init.vim'
+alias zshrc='nvim ~/.zshrc; source ~/.zshrc'
 
 # Compilers / interpreters
 alias py='python3'
@@ -78,13 +76,11 @@ NEOVIM_CONFIG='~/GitHub/dotfiles/nvim/init.vim'
 
 if (test "$NEOVIM"); then
     if (test "$NEOVIM_CONFIG"); then
-        alias nvim="$NV_PATH -u $NEOVIM_CONFIG"
+        alias nvim="$NEOVIM -u $NEOVIM_CONFIG"
     else
-        alias nvim="$NV_PATH"
+        alias nvim="$NEOVim"
     fi
 fi
-
-
 
 
 
