@@ -72,8 +72,16 @@ alias gcc='gcc -Wall'
 # Fixes cargo's failed to authenticate issue
 CARGO_NET_GIT_FETCH_WITH_CLI=true
 
-if [[ '~/Programs/nvim-linux64/bin/nvim' ]]; then
-    alias nvim='~/Programs/nvim-linux64/bin/nvim'
+# ENSIMAG setup
+NEOVIM='~/Programs/nvim-linux64/bin/nvim'
+NEOVIM_CONFIG='~/GitHub/dotfiles/nvim/init.vim'
+
+if (test "$NEOVIM"); then
+    if (test "$NEOVIM_CONFIG"); then
+        alias nvim="$NV_PATH -u $NEOVIM_CONFIG"
+    else
+        alias nvim="$NV_PATH"
+    fi
 fi
 
 
