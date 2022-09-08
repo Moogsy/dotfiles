@@ -20,10 +20,10 @@ function MakeVimspectorJson()
         endif
 
         if &filetype ==# 'c' || &filetype ==# 'cpp'
-            call system("cp ~/.config/nvim/vimspector_jsons/c_cpp_vimspector.json .vimspector.json")
+            call system("cp ~/GitHub/dotfiles/nvim/vimspector_jsons/c_cpp_vimspector.json .vimspector.json")
 
         elseif &filetype ==# "python"
-            call system("cp ~/.config/nvim/vimspector_jsons/python_vimspector.json .vimspector.json")
+            call system("cp ~/GitHub/dotfiles/nvim/vimspector_jsons/python_vimspector.json .vimspector.json")
         endif
     endif
 
