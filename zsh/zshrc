@@ -60,7 +60,7 @@ alias ls='ls --color'
 
 
 # Editor stuff
-alias nvim='nvim -u ~/GitHub/dotfiles/nvim/init.vim'
+alias nv='nvim -u ~/GitHub/dotfiles/nvim/init.vim'
 alias zshrc='nvim ~/.zshrc; source ~/.zshrc'
 
 # Compilers / interpreters
