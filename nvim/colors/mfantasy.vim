@@ -13,7 +13,7 @@ endif
 set background=dark
 
 " Background color
-hi Normal guifg=White ctermbg=NONE guibg=#353042 gui=NONE
+hi Normal guifg=#F8F8F2 guibg=#1B1D1E
 hi link NormalFloat Normal
 hi link NormalNC Normal
 

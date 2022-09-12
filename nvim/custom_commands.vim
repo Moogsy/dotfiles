@@ -1,24 +1,43 @@
-" Removes all trailing whitespaces
+" Removes all trailing whitespaces, and remove trailing newlines
 command TrimTrailingWhitespace %s/\s\+$//e | nohl
+
+function LineIsEmpty(line)
+    return trim(a:line) == ""
+endfunction
+
+function GetEmptyLinecount(lines)
+    let empty_lines_count = 0
+
+    for line in reverse(a:lines)
+        if LineIsEmpty(line)
+            let empty_lines_count += 1
+        else
+            break
+        endif
+    endfor
+
+    return empty_lines_count
+
+endfunction
 
 function AddBlankLineEndofFileFunc()
     let path = resolve(expand('%:p'))
-    let lines = readfile(path, '', -1)
+    let lines = readfile(path, '')
 
-    if len(lines) > 0
-        let lastLine = lines[0]
-    else
+    if len(lines) <= 0
         return
     endif
 
-    if trim(lastLine) != ""
+    let empty_lines_count = GetEmptyLinecount(lines)
+
+    if empty_lines_count == 0
         call feedkeys("Go\<Esc>\<C-O>", 'normal')
+    elseif empty_lines_count > 1
+        call feedkeys((len(lines) - empty_lines_count + 1) ."G" . (empty_lines_count - 1) . "dd")
     endif
+
 endfunction
 
-" Adds a blank line at the end of the current file if needed
-command AddBlankLineEndofFile call AddBlankLineEndofFileFunc()
-
-autocmd BufWritePost * TrimTrailingWhitespace
-autocmd BufWritePost * AddBlankLineEndofFile
+autocmd BufWritePost * call AddBlankLineEndofFileFunc()
+autocmd BufWritePost * TrimTrailingWhitespace    
 
