@@ -20,7 +20,6 @@
 "" after that copy this file as your ~/.vimrc and execute :PlugInstall
 
 set nocompatible
-filetype off
 
 call plug#begin('~/.vim/plugged')
 
@@ -29,6 +28,9 @@ Plug 'vim-airline/vim-airline' " status bar (needs special fonts)
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'ryanoasis/vim-devicons' " various symbols (linux, rust, python, ...)
+
+Plug 'Yggdroot/indentline' " Add different symbols depending on indentation depth
+let g:indentLine_char_list=['|', '¦', '┆', '┊']
 
 " essential plugins
 " see for example https://github.com/autozimu/LanguageClient-neovim/issues/35#issuecomment-288731665
@@ -45,6 +47,9 @@ Plug 'psf/black' " Auto format
 Plug 'rust-lang/rust.vim' " syntax highlighting
 Plug 'mattn/webapi-vim' " used for rust playpen
 
+" Debugger
+Plug 'puremourning/vimspector'
+
 " Git
 Plug 'tpope/vim-fugitive' " git
 
@@ -57,18 +62,10 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 
-" ultisnips default bindings compete with completor's tab
-" so we need to remap them
-let g:UltiSnipsExpandTrigger="<c-t>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" airline :
-" for terminology you will need either to export TERM='xterm-256color'
-" or run it with '-2' option
+" Airline
 let g:airline_powerline_fonts = 1
 set laststatus=2
-au VimEnter * exec 'AirlineTheme hybrid'
+au VimEnter * exec 'AirlineTheme deus'
 
 " Compatibility
 set encoding=utf-8
@@ -76,15 +73,33 @@ set notermguicolors " we disable truecolor display :-( to be compatible with man
 
 " Custom theme
 syntax on
-colo mfantasy
+colorscheme mfantasy
 set background=dark
-set number
 
-" replace tabs with 4 spaces
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set expandtab
+" Readability
+set number " Show line number
+set nowrap " Do not wrap long lines
+set conceallevel=0 " Do not hide any characters
+
+" Interface
+set title " Show currently edited file name in windo title
+set wildmenu " Always show completion when possible
+set showmatch " Show matching parenthesis when writing one
+
+" Tabs to 4 space
+set tabstop=4 " Tabs writes 4 spaces
+set shiftwidth=4 " Consider 4 spaces as default indentation
+set softtabstop=4 " Consider tab as 4 spaces
+set expandtab " Insert/Remove 4 spaces when using > or <
+set shiftround " Round indents to 4 spaces
+
+" Search settings
+set hlsearch " Highlight matching words when searching
+
+" Explorer
+set path+=** " Recursively search files through subfolders
+let g:netrw_altv=0
+let g:netrw_liststyle=3
 
 " Jump through splits
 nnoremap <C-H> <C-W><C-H>
@@ -92,7 +107,7 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 
-" highlight trailing whitespace
+" Highlight trailing whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+\%#\@<!$/
 
