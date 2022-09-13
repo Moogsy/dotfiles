@@ -24,8 +24,6 @@ filetype off
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'tpope/vim-sensible' " sane defaults
-
 " Eye candy
 Plug 'vim-airline/vim-airline' " status bar (needs special fonts)
 Plug 'vim-airline/vim-airline-themes'
