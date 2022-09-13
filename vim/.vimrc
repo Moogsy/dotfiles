@@ -30,8 +30,6 @@ Plug 'tpope/vim-sensible' " sane defaults
 Plug 'vim-airline/vim-airline' " status bar (needs special fonts)
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'tomasr/molokai' " colorscheme compatible with many terminals
-
 Plug 'ryanoasis/vim-devicons' " various symbols (linux, rust, python, ...)
 
 " essential plugins
@@ -51,10 +49,6 @@ Plug 'mattn/webapi-vim' " used for rust playpen
 
 " Git
 Plug 'tpope/vim-fugitive' " git
-
-" Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 
 call plug#end()
 
@@ -109,8 +103,6 @@ let g:LanguageClient_loadSettings = 1 " this enables you to have per-projects la
 let g:rustfmt_autosave = 1
 let g:rust_conceal = 1
 set hidden
-au BufEnter,BufNewFile,BufRead *.rs syntax match rustEquality "==\ze[^>]" conceal cchar=≟
-au BufEnter,BufNewFile,BufRead *.rs syntax match rustInequality "!=\ze[^>]" conceal cchar=≠
 
 " run language server for python, rust and c
 let g:LanguageClient_autoStart = 1
