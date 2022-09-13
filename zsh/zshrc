@@ -70,3 +70,5 @@ alias gcc='gcc -Wall'
 # Fixes cargo's failed to authenticate issue
 CARGO_NET_GIT_FETCH_WITH_CLI=true
 
+# To customize prompt, run `p10k configure` or edit /user/3/.base/nguthiba/home/.p10k.zsh.
+[[ ! -f /user/3/.base/nguthiba/home/.p10k.zsh ]] || source /user/3/.base/nguthiba/home/.p10k.zsh
