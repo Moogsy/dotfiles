@@ -101,12 +101,6 @@ set path+=** " Recursively search files through subfolders
 let g:netrw_altv=0
 let g:netrw_liststyle=3
 
-" Jump through splits
-nnoremap <C-H> <C-W><C-H>
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-
 " Highlight trailing whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+\%#\@<!$/
@@ -126,6 +120,71 @@ let g:LanguageClient_serverCommands = {
     \ 'go': ['go-langserver'],
     \ 'c' : ['clangd'] }
 
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR> " hit :pc to close the preview window
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+
+" Vimspector setup
+
+let g:vimspector_jsons_folder = "~/GitHub/dotfiles/vim/vimspector_jsons/"
+let g:vimspector_target_filename = ".vimspector.json"
+
+function CheckVimspectorJsonPresence()
+    let jsons = split(globpath(".", ".vimspector.json"), "\n")
+
+    if len(jsons) >= 1
+        return 1
+    endif
+
+    return 0
+endfunction
+
+function MakeVimspectorJson()
+    if CheckVimspectorJsonPresence() != 1
+        let prompt = "Couldn't find .vimspector.json in current folder, copy default one for "
+        let prompt .= &filetype . " (y/n/default: y) ? "
+
+        let answer = input(prompt, "y")
+
+        if answer != "y"
+            return
+        endif
+
+        if &filetype ==# 'c' || &filetype ==# 'cpp'
+            call system("cp " . g:vimspector_jsons_folder . "/c_cpp_vimspector.json " . g:vimspector_target_filename)
+
+        elseif &filetype ==# "python"
+            call system("cp " . g:vimspector_jsons_folder . "/python_vimspector.json " . g:vimspector_target_filename)
+        endif
+
+        let l:json_path = g:vimspector_jsons_folder . &filetype . "_vimspector.json"
+
+        if !empty(glob(l:json_path))
+            call system("cp " . l:json_path . " .vimspector.json")
+        else
+            echo "Couldn't find vimspector for language: " . &filetype
+        endif
+    endif
+
+    call vimspector#Continue()
+
+endfunction
+
+"Start debugging
+nmap <F5> :call MakeVimspectorJson() <CR>
+
+"Stop debugging
+map <F17> :call vimspector#Reset() <CR>
+
+"Step control
+nmap <F6>  <Plug>VimspectorStepOver
+nmap <F18> <Plug>VimspectorStepInto
+
+"Jump out of current function's scope
+nmap <F7> <Plug>VimspectorStepOut
+
+"Breakpoints
+nmap <F3> <Plug>VimspectorBreakpoints
+nmap <F4> <Plug>VimspectorToggleBreakpoint
+
+" Remap caps lock to escape on enter, reset it on leave
+au VimEnter * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+au VimLeave * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
