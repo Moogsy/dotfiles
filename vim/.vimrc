@@ -1,4 +1,4 @@
-"" ensimag vim config file version 1.0.3 (Edited by Moogs)
+"" ENSIMAG vim config file version 1.0.3 (Edited by Moogs)
 "" this file is intended for vim 8
 
 "" before using it you will need to
@@ -26,6 +26,7 @@ call plug#begin('~/.vim/plugged')
 " Eye candy
 Plug 'vim-airline/vim-airline' " status bar (needs special fonts)
 Plug 'vim-airline/vim-airline-themes'
+Plug 'frazrepo/vim-rainbow' " Highlight matching parenthesises with same colors
 
 Plug 'ryanoasis/vim-devicons' " various symbols (linux, rust, python, ...)
 
@@ -47,11 +48,17 @@ Plug 'psf/black' " Auto format
 Plug 'rust-lang/rust.vim' " syntax highlighting
 Plug 'mattn/webapi-vim' " used for rust playpen
 
+" Svg
+Plug 'vim-scripts/svg.vim'
+
 " Debugger
 Plug 'puremourning/vimspector'
 
 " Git
-Plug 'tpope/vim-fugitive' " git
+Plug 'tpope/vim-fugitive'
+
+" Snippets
+Plug 'honza/vim-snippets'
 
 call plug#end()
 
@@ -61,6 +68,13 @@ filetype plugin indent on
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+
+" Always activate rainbow parenthesis
+let g:rainbow_active = 1
+
+" White / Light green / Light blue / Yellow / Red
+let g:rainbow_guifgs = ["#FFFFFF", "#90EE90", "#ADD8E6", "#FFFF00", "#FF0000"]
+let g:rainbow_ctermfgs = g:rainbow_guifgs
 
 " Airline
 let g:airline_powerline_fonts = 1
@@ -93,19 +107,19 @@ set softtabstop=4 " Consider tab as 4 spaces
 set expandtab " Insert/Remove 4 spaces when using > or <
 set shiftround " Round indents to 4 spaces
 
-" Search settings
+"" Search settings
 set hlsearch " Highlight matching words when searching
+set is " Search as you type
 
-" Explorer
+"" Explorer setup
 set path+=** " Recursively search files through subfolders
 let g:netrw_altv=0
-let g:netrw_liststyle=3
 
-" Highlight trailing whitespace
+"" Highlight trailing whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+\%#\@<!$/
 
-" Rust stuff
+"" Rust setup
 let g:LanguageClient_loadSettings = 1 " this enables you to have per-projects languageserver settings in .vim/settings.json
 let g:rustfmt_autosave = 1
 let g:rust_conceal = 1
@@ -122,7 +136,7 @@ let g:LanguageClient_serverCommands = {
 
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 
-" Vimspector setup
+"" Vimspector setup
 
 let g:vimspector_jsons_folder = "~/GitHub/dotfiles/vim/vimspector_jsons/"
 let g:vimspector_target_filename = ".vimspector.json"
@@ -145,6 +159,7 @@ function MakeVimspectorJson()
         let answer = input(prompt, "y")
 
         if answer != "y"
+            echo "Aborted"
             return
         endif
 
@@ -168,23 +183,40 @@ function MakeVimspectorJson()
 
 endfunction
 
-"Start debugging
+" Start debugging
 nmap <F5> :call MakeVimspectorJson() <CR>
 
-"Stop debugging
+" Stop debugging
 map <F17> :call vimspector#Reset() <CR>
 
-"Step control
+" Step control
 nmap <F6>  <Plug>VimspectorStepOver
 nmap <F18> <Plug>VimspectorStepInto
 
-"Jump out of current function's scope
+" Jump out of current function's scope
 nmap <F7> <Plug>VimspectorStepOut
 
-"Breakpoints
+" Breakpoints
 nmap <F3> <Plug>VimspectorBreakpoints
 nmap <F4> <Plug>VimspectorToggleBreakpoint
 
-" Remap caps lock to escape on enter, reset it on leave
+"" Remaps
+
+" Map caps lock to escape on entry, fix it on exit
 au VimEnter * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 au VimLeave * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
+
+"" Custom commands
+
+" Removes unwanted whitespaces and puts the cursor back in position
+function TrimTrailingWhiteSpaceFunc()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfunction
+
+command TrimTrailingWhiteSpace call TrimTrailingWhiteSpaceFunc()
+
+" Sources the currently used vimrc
+command SourceVimrc :source $MYVIMRC
+
