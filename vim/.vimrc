@@ -74,7 +74,7 @@ let g:rainbow_active = 1
 
 " White / Light green / Light blue / Yellow / Red
 let g:rainbow_guifgs = ["#FFFFFF", "#90EE90", "#ADD8E6", "#FFFF00", "#FF0000"]
-let g:rainbow_ctermfgs = g:rainbow_guifgs
+let g:rainbow_ctermfgs = [15, 10, 14, 226, 196]
 
 " Airline
 let g:airline_powerline_fonts = 1
