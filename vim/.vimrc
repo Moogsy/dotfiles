@@ -20,13 +20,23 @@
 "" after that copy this file as your ~/.vimrc and execute :PlugInstall
 
 set nocompatible
+filetype plugin indent on
 
 call plug#begin('~/.vim/plugged')
 
 " Eye candy
 Plug 'vim-airline/vim-airline' " status bar (needs special fonts)
 Plug 'vim-airline/vim-airline-themes'
-Plug 'frazrepo/vim-rainbow' " Highlight matching parenthesises with same colors
+let g:airline_powerline_fonts = 1
+set laststatus=2
+au VimEnter * exec 'AirlineTheme deus'
+
+" Highlight matching parenthesises with same colors
+Plug 'frazrepo/vim-rainbow'
+let g:rainbow_active = 1 "Always keep it active
+let g:rainbow_guifgs = ["#E0B0FF", "#90EE90", "#ADD8E6", "#FFFF00", "#FF0000"]
+let g:rainbow_ctermfgs = [201, 10, 14, 226, 196] " purple / green / blue / yellow / Red
+
 
 Plug 'ryanoasis/vim-devicons' " various symbols (linux, rust, python, ...)
 
@@ -41,12 +51,30 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ } " as of july 2019 this branch is needed for vim8 (at ensimag, doesn't need it on my pc)
 
+let g:LanguageClient_loadSettings = 1 " this enables you to have per-projects languageserver settings in .vim/settings.json
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {
+    \ 'python': ['pyls'],
+    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'go': ['go-langserver'],
+    \ 'c' : ['clangd'] }
+
+
+" configure maralla/completor to use tab
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+
+
 " Python
 Plug 'psf/black' " Auto format
 
 " Rust
 Plug 'rust-lang/rust.vim' " syntax highlighting
 Plug 'mattn/webapi-vim' " used for rust playpen
+let g:rustfmt_autosave = 1
+let g:rust_conceal = 1
 
 " Svg
 Plug 'vim-scripts/svg.vim'
@@ -62,45 +90,32 @@ Plug 'honza/vim-snippets'
 
 call plug#end()
 
-filetype plugin indent on
-
-" configure maralla/completor to use tab
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-
-" Always activate rainbow parenthesis
-let g:rainbow_active = 1
-
-" White / Light green / Light blue / Yellow / Red
-let g:rainbow_guifgs = ["#FFFFFF", "#90EE90", "#ADD8E6", "#FFFF00", "#FF0000"]
-let g:rainbow_ctermfgs = [15, 10, 14, 226, 196]
-
-" Airline
-let g:airline_powerline_fonts = 1
-set laststatus=2
-au VimEnter * exec 'AirlineTheme deus'
-
-" Compatibility
+"" File specific
 set encoding=utf-8
-set notermguicolors " we disable truecolor display :-( to be compatible with many terminals
 
 " Custom theme
 syntax on
 colorscheme mfantasy
 set background=dark
 
-" Readability
+"" Readability
 set number " Show line number
 set nowrap " Do not wrap long lines
 set conceallevel=0 " Do not hide any characters
 
-" Interface
-set title " Show currently edited file name in windo title
+"" Interface
+set title " Show currently edited file name in window title
 set wildmenu " Always show completion when possible
-set showmatch " Show matching parenthesis when writing one
+set termguicolors " Make everything colored, might not work on older terms
 
-" Tabs to 4 space
+"" Indentation
+set nocindent " do not follow C rules for indentation
+
+"""Parenthesis
+set showmatch " Show matching parenthesis when writing one
+set matchtime=2 " Show matching parenthesis for 0.2 secs
+
+"" Tabs to 4 space
 set tabstop=4 " Tabs writes 4 spaces
 set shiftwidth=4 " Consider 4 spaces as default indentation
 set softtabstop=4 " Consider tab as 4 spaces
@@ -111,6 +126,11 @@ set shiftround " Round indents to 4 spaces
 set hlsearch " Highlight matching words when searching
 set is " Search as you type
 
+" When a search is entered without any caps, perform a caseless match.
+" Otherwise, make it case dependant
+set ignorecase
+set smartcase
+
 "" Explorer setup
 set path+=** " Recursively search files through subfolders
 let g:netrw_altv=0
@@ -119,21 +139,18 @@ let g:netrw_altv=0
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+\%#\@<!$/
 
-"" Rust setup
-let g:LanguageClient_loadSettings = 1 " this enables you to have per-projects languageserver settings in .vim/settings.json
-let g:rustfmt_autosave = 1
-let g:rust_conceal = 1
+"" Shortcuts
+
+" Do not require w to be pressed to jump through splits
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+
+
 set hidden
 
 " run language server for python, rust and c
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_serverCommands = {
-    \ 'python': ['pyls'],
-    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'go': ['go-langserver'],
-    \ 'c' : ['clangd'] }
-
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 
 "" Vimspector setup

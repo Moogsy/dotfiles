@@ -1,23 +1,14 @@
 highlight clear
 
-if exists('syntax_on')
-    syntax reset
-endif
-
-if has('termguicolors')
-    set termguicolors
-else
-    set t_co=256
-endif
-
-set background=dark
+set termguicolors
+set t_Co=256
+let g:colors_name = "mfantasy"
 
 " Background color
-hi Normal guifg=#F8F8F2 guibg=#1B1D1E
+hi Normal guibg=#2C2638
 hi link NormalFloat Normal
 hi link NormalNC Normal
 
-let g:colors_name = "mfantasy"
 
 " Code highlighting
 
@@ -64,7 +55,4 @@ hi Todo guifg=#0000ff
 
 " Pop menus colors
 hi Pmenu guifg=White guibg=DarkBlue
-hi link CocFloating Pmenu
-
-hi CocErrorFloat guifg=Red
 

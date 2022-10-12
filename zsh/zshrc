@@ -45,12 +45,12 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-# Actual aliases
+# Shorten common commands
 alias q='exit'
 alias cls='clear'
 
 # Add some default arguments
-alias ls='ls --color --human-readable --group-directories-first --sort=extension'
+alias ls='ls --color --human-readable --group-directories-first --sort=extension -v'
 
 # Editor stuff
 alias vimrc='vim ~/.vimrc'
@@ -59,6 +59,9 @@ alias zshrc='vim ~/.zshrc; source ~/.zshrc'
 # Compilers / interpreters
 alias py='python3'
 alias gcc='gcc -Wall'
+
+# Repl
+alias ipy="ipython"
 
 # Fixes cargo's failed to authenticate issue
 CARGO_NET_GIT_FETCH_WITH_CLI=true
