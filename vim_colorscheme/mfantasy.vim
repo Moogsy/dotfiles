@@ -56,3 +56,8 @@ hi Todo guifg=#0000ff
 " Pop menus colors
 hi Pmenu guifg=White guibg=DarkBlue
 
+" Coc specific colors
+hi link CocFloating Pmenu
+
+hi CocErrorFloat guifg=Red
+
