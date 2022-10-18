@@ -35,7 +35,7 @@ au VimEnter * exec 'AirlineTheme deus'
 Plug 'frazrepo/vim-rainbow'
 let g:rainbow_active = 1 "Always keep it active
 let g:rainbow_guifgs = ["#E0B0FF", "#90EE90", "#ADD8E6", "#FFFF00", "#FF0000"]
-let g:rainbow_ctermfgs = [201, 10, 14, 226, 196] " purple / green / blue / yellow / Red
+let g:rainbow_ctermfgs = [201, 10, 14, 226, 196] " Purple / Green / Blue / Yellow / Red
 
 
 Plug 'ryanoasis/vim-devicons' " various symbols (linux, rust, python, ...)

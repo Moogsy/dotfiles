@@ -1,11 +1,9 @@
-highlight clear
-
 set termguicolors
 set t_Co=256
 let g:colors_name = "mfantasy"
 
 " Background color
-hi Normal guibg=#000000
+hi Normal guibg=Black
 hi link NormalFloat Normal
 hi link NormalNC Normal
 
@@ -48,16 +46,17 @@ hi link Delimiter Special
 hi link SpecialComment Special
 hi link Debug Special
 
-hi Underlined guifg=DodgerBlue
-hi Error guifg=#00ffff
-hi Todo guifg=#0000ff
+hi Error guifg=Red guibg=White
+hi Todo guibg=Magenta guifg=Green
 
 " Pop menus colors
-hi Pmenu guifg=White guibg=DarkBlue
+hi Pmenu guifg=Cyan guibg=#282c35
+hi PmenuSel guifg=Cyan guibg=#6b768f
 
 "" Coc specific colors
+
+" floating autocompleion menu
 hi link CocFloating Pmenu
 
-hi CocErrorFloat guifg=Red
-hi CocHighlightText ctermfg=Magenta guifg=Magenta
-
+" Inlined typehints
+hi link CocInlayHint Pmenu

@@ -5,32 +5,108 @@
 " - Requires vim-plug, see https://github.com/junegunn/vim-plug for details
 "
 
+""" Neovim specific setup
+
+" Force the usage of python 3
+set pyx=3
+
+" Do not use funky encodings since we'll mostly edit source files
+set encoding=utf-8
+
+"" Custom theme
+syntax on 
+colorscheme mfantasy
+
+"" Readability
+set number " Show line number
+set nowrap " Do not wrap long lines
+set conceallevel=0 " Do not hide any characters
+
+"" Interface
+set title " Show currently edited file name in window title
+set wildmenu " Always show completion when possible
+set termguicolors " Make everything colored, might not work on older terms
+set laststatus=2 " Always show status lines, even in splits
+set scrolloff=2 " Show atleast 2 lines above and below the cursor
+set sidescrolloff=5 " Show atleast 5 chars when scrolling to the side
+
+"" Indentation
+set nocindent " do not follow C rules for indentation
+
+"" Insert mode related
+set backspace=indent,eol,start " Let us backspace over anything
+
+""" Parenthesises
+set showmatch " Show matching parenthesis when writing one
+set matchtime=1 " Show matching parenthesis for 0.1 secs
+
+"" Tabs to 4 space
+set tabstop=4 " Tabs writes 4 spaces
+set shiftwidth=4 " Consider 4 spaces as default indentation
+set softtabstop=4 " Consider tab as 4 spaces
+set expandtab " Insert/Remove 4 spaces when typing >> / <<
+set shiftround " Round indents to 4 spaces
+
+"" Search settings
+set hlsearch " Highlight matching words when searching
+set is " Search as you type
+
+" When a search is entered without any caps, perform a caseless match.
+" Otherwise, make it case dependant
+set ignorecase
+set smartcase
+
+"" Explorer setup
+set path+=** " Recursively search files through subfolders
+
+"" Remaps
+
+" Do not require w to be pressed to jump through splits
+nmap <C-H> <C-W><C-H>
+nmap <C-J> <C-W><C-J>
+nmap <C-K> <C-W><C-K>
+nmap <C-L> <C-W><C-L>
+
+" Map caps lock to escape on entry, fix it on exit
+au VimEnter * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+au VimLeave * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
+
+
 "" Plugin imports
 call plug#begin()
 
-" Eye candy, needs special fonts, refer to https://github.com/vim-airline/vim-airline
-" for details
+" Status bar
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+" Git
+Plug 'tpope/vim-fugitive'
 
 " Readability 
 Plug 'frazrepo/vim-rainbow' " Highlights matching parenthesises with same colors
 Plug 'Yggdroot/indentLine' " Shows different indicators depending on indentation depth
+Plug 'norcalli/nvim-colorizer.lua' " Highlight colors with their values
 
 " General syntax highlighting
 Plug 'sheerun/vim-polyglot'
 
 " General language plugins
 Plug 'puremourning/vimspector' " Debugger
-Plug 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim' " Autocompletion and more
 
 " Python-specific plugins
 Plug 'numirias/semshi' " Better highlighting, run :UpdateRemotePlugins to activate it
 Plug 'psf/black' " Automatically format
 
+" Latex-specific plugins
+Plug 'lervag/vimtex'
+
 call plug#end()
 
 """ Plugins setup 
+
+""" Colorizer setup
+lua require'colorizer'.setup()
 
 "" Airline setup
 let g:airline_detect_modified=1 
@@ -52,10 +128,6 @@ set nowritebackup
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=300
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: There's always complete item selected by default, you may want to enable
@@ -233,65 +305,6 @@ nmap <F7> <Plug>VimspectorStepOut
 " Run until it reaches the cursor
 nmap <F19> <Plug>VimspectorRunToCursor
 
-""" Neovim specific setup
-
-" Force the usage of python 3
-set pyx=3
-
-" Do not use funky encodings since we'll mostly edit source files
-set encoding=utf-8
-
-"" Custom theme
-syntax on 
-colorscheme mfantasy
-
-"" Readability
-set number " Show line number
-set nowrap " Do not wrap long lines
-set conceallevel=0 " Do not hide any characters
-
-"" Interface
-set title " Show currently edited file name in window title
-set wildmenu " Always show completion when possible
-set termguicolors " Make everything colored, might not work on older terms
-set laststatus=2 " Always show status lines, even in splits
-
-"" Indentation
-set nocindent " do not follow C rules for indentation
-
-"""Parenthesises
-set showmatch " Show matching parenthesis when writing one
-set matchtime=1 " Show matching parenthesis for 0.1 secs
-
-"" Tabs to 4 space
-set tabstop=4 " Tabs writes 4 spaces
-set shiftwidth=4 " Consider 4 spaces as default indentation
-set softtabstop=4 " Consider tab as 4 spaces
-set expandtab " Insert/Remove 4 spaces when typing >> / <<
-set shiftround " Round indents to 4 spaces
-
-"" Search settings
-set hlsearch " Highlight matching words when searching
-set is " Search as you type
-
-" When a search is entered without any caps, perform a caseless match.
-" Otherwise, make it case dependant
-set ignorecase
-set smartcase
-
-"" Explorer setup
-set path+=** " Recursively search files through subfolders
-
-"" Remaps
-
-" Do not require w to be pressed to jump through splits
-nmap <C-H> <C-W><C-H>
-nmap <C-J> <C-W><C-J>
-nmap <C-K> <C-W><C-K>
-nmap <C-L> <C-W><C-L>
-
-" Map caps lock to escape on entry, fix it on exit
-au VimEnter * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
-au VimLeave * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
-
-
+"" Vimtex setup
+let g:vimtex_view_method='zathura'
+let g:vimtex_syntax_conceal_disable=1

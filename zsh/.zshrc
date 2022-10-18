@@ -54,6 +54,10 @@ alias ls='ls --color --human-readable --group-directories-first --sort=extension
 
 # Editor stuff
 alias vimrc='vim ~/.vimrc'
+
+alias nv='nvim'
+alias nvimrc='nvim ~/.config/nvim/init.vim'
+
 alias zshrc='vim ~/.zshrc; source ~/.zshrc'
 
 # Compilers / interpreters
@@ -68,3 +72,8 @@ CARGO_NET_GIT_FETCH_WITH_CLI=true
 
 # To customize prompt, run `p10k configure` or edit /user/3/.base/nguthiba/home/.p10k.zsh.
 [[ ! -f /user/3/.base/nguthiba/home/.p10k.zsh ]] || source /user/3/.base/nguthiba/home/.p10k.zsh
+
+# VPN stuff
+alias vpnimag='nmcli c up vpn_ensimag'
+alias novpnimag='nmcli c down vpn_ensimag'
+
