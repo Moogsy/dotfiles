@@ -50,7 +50,7 @@ alias q='exit'
 alias cls='clear'
 
 # Add some default arguments
-alias ls='colorls --color --human-readable --group-directories-first --sort=extension'
+alias ls='ls --color --human-readable --group-directories-first --sort=extension'
 
 # Editor stuff
 alias vimrc='nvim ~/.vimrc'
