@@ -75,9 +75,29 @@ au VimLeave * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
 "" Plugin imports
 call plug#begin()
 
+" Jump around text quickly
+Plug 'phaazon/hop.nvim'
+
+" Fonts that will handle all of those icons
+Plug 'ryanoasis/vim-devicons'
+
 " Status bar
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+" Change command bar appearance
+Plug 'folke/noice.nvim'
+Plug 'MunifTanjim/nui.nvim'
+
+" Notification like system
+Plug 'rcarriga/nvim-notify'
+
+" Augmented file explorer
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+
+" Minimap
+Plug 'wfxr/minimap.vim'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -106,7 +126,7 @@ call plug#end()
 """ Plugins setup 
 
 """ Colorizer setup
-lua require'colorizer'.setup()
+lua require('colorizer').setup()
 
 "" Airline setup
 let g:airline_detect_modified=1 
@@ -119,7 +139,7 @@ let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
 let g:airline_theme='badwolf'
 
-"" COC setup
+"" Coc setup
 
 " Some servers have issues with backup files, see #649.
 set nobackup
@@ -265,19 +285,47 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+"" Hop setup
+lua require("hop").setup()
+
 "" Identline setup
 let g:indentLine_char_list=['|', '¦', '┆', '┊'] "Indentation indicators
+
+"" Minimap setup
+let g:minimap_width = 5
+let g:minimap_auto_start = 1
+let g:minimap_auto_start_win_enter = 1
+let g:minimap_highlight_range = 1
+let g:minimap_highlight_search = 1
+let g:minimap_git_colors = 1
+let g:minimap_enable_highlight_colorgroup = 1
+nnoremap <silent>" :nohlsearch<CR>:call minimap#vim#ClearColorSearch()<CR>
+
+function KillMinimap() abort
+    let l:counter = 0
+endfunction
+
+autocmd BufWinLeave * call KillMinimap()
+
+"" Noice setup
+lua require("noice").setup()
 
 "" Rainbow setup
 let g:rainbow_active = 1 "Always keep it active
 
-" purple / green / blue / yellow / Red
+" Purple / Green / Blue / Yellow / Red
 let g:rainbow_guifgs = ["#E0B0FF", "#90EE90", "#ADD8E6", "#FFFF00", "#FF0000"]
 let g:rainbow_ctermfgs = [201, 10, 14, 226, 196] 
 
 "" Semshi setup
 let g:semshi#excluded_hl_groups = [] " Highlight all groups differently
 let g:semshi#simplify_markup = v:false " Keep distinguishing as many groups as possible
+
+"" Telescope setup
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 "" Vimspector setup
 
@@ -306,5 +354,17 @@ nmap <F7> <Plug>VimspectorStepOut
 nmap <F19> <Plug>VimspectorRunToCursor
 
 "" Vimtex setup
-let g:vimtex_view_method='zathura'
-let g:vimtex_syntax_conceal_disable=1
+let g:vimtex_view_method='zathura' " Use the zathura pdf viewer
+let g:vimtex_syntax_conceal_disable=1 " Do not conceal characters
+
+function! ZathuraHook() abort
+  if exists('b:vimtex.viewer.xwin_id') && b:vimtex.viewer.xwin_id <= 0
+    silent call system('xdotool windowactivate ' . b:vimtex.viewer.xwin_id . ' --sync')
+    silent call system('xdotool windowraise ' . b:vimtex.viewer.xwin_id)
+  endif
+endfunction
+
+augroup vimrc_vimtex
+  autocmd!
+  autocmd User VimtexEventView call ZathuraHook()
+augroup END

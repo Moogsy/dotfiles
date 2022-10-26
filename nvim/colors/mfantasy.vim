@@ -3,7 +3,7 @@ set t_Co=256
 let g:colors_name = "mfantasy"
 
 " Background color
-hi Normal guibg=Black
+hi Normal guibg=#300a24
 hi link NormalFloat Normal
 hi link NormalNC Normal
 

@@ -50,15 +50,14 @@ alias q='exit'
 alias cls='clear'
 
 # Add some default arguments
-alias ls='ls --color --human-readable --group-directories-first --sort=extension -v'
+alias ls='colorls --color --human-readable --group-directories-first --sort=extension'
 
 # Editor stuff
-alias vimrc='vim ~/.vimrc'
+alias vimrc='nvim ~/.vimrc'
 
 alias nv='nvim'
 alias nvimrc='nvim ~/.config/nvim/init.vim'
-
-alias zshrc='vim ~/.zshrc; source ~/.zshrc'
+alias zshrc='nvim ~/.zshrc; source ~/.zshrc'
 
 # Compilers / interpreters
 alias py='python3'
