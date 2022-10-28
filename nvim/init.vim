@@ -96,9 +96,6 @@ Plug 'rcarriga/nvim-notify'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 
-" Minimap
-Plug 'wfxr/minimap.vim'
-
 " Git
 Plug 'tpope/vim-fugitive'
 
@@ -290,22 +287,6 @@ lua require("hop").setup()
 
 "" Identline setup
 let g:indentLine_char_list=['|', '¦', '┆', '┊'] "Indentation indicators
-
-"" Minimap setup
-let g:minimap_width = 5
-let g:minimap_auto_start = 1
-let g:minimap_auto_start_win_enter = 1
-let g:minimap_highlight_range = 1
-let g:minimap_highlight_search = 1
-let g:minimap_git_colors = 1
-let g:minimap_enable_highlight_colorgroup = 1
-nnoremap <silent>" :nohlsearch<CR>:call minimap#vim#ClearColorSearch()<CR>
-
-function KillMinimap() abort
-    let l:counter = 0
-endfunction
-
-autocmd BufWinLeave * call KillMinimap()
 
 "" Noice setup
 lua require("noice").setup()

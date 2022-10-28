@@ -76,3 +76,6 @@ CARGO_NET_GIT_FETCH_WITH_CLI=true
 alias vpnimag='nmcli c up vpn_ensimag'
 alias novpnimag='nmcli c down vpn_ensimag'
 
+# To customize prompt, run `p10k configure` or edit ~/powerlevel10k/config/p10k-lean.zsh.
+[[ ! -f ~/powerlevel10k/config/p10k-lean.zsh ]] || source ~/powerlevel10k/config/p10k-lean.zsh
+source ~/powerlevel10k/powerlevel10k.zsh-theme
