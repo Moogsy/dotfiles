@@ -44,7 +44,6 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-
 # Shorten common commands
 alias q='exit'
 alias cls='clear'
@@ -53,28 +52,22 @@ alias cls='clear'
 alias ls='ls --color --human-readable --group-directories-first --sort=extension'
 
 # Editor stuff
-alias vimrc='nvim ~/.vimrc'
-
 alias nv='nvim'
 alias nvimrc='nvim ~/.config/nvim/init.vim'
+alias vimrc='nvim ~/.vimrc'
 alias zshrc='nvim ~/.zshrc; source ~/.zshrc'
 
-# Compilers / interpreters
+# Programming
 alias py='python3'
 alias gcc='gcc -Wall'
-
-# Repl
 alias ipy="ipython"
-
-# Fixes cargo's failed to authenticate issue
-CARGO_NET_GIT_FETCH_WITH_CLI=true
-
-# To customize prompt, run `p10k configure` or edit /user/3/.base/nguthiba/home/.p10k.zsh.
-[[ ! -f /user/3/.base/nguthiba/home/.p10k.zsh ]] || source /user/3/.base/nguthiba/home/.p10k.zsh
 
 # VPN stuff
 alias vpnimag='nmcli c up vpn_ensimag'
 alias novpnimag='nmcli c down vpn_ensimag'
+
+# Fixes cargo's failed to authenticate issue
+CARGO_NET_GIT_FETCH_WITH_CLI=true
 
 # To customize prompt, run `p10k configure` or edit ~/powerlevel10k/config/p10k-lean.zsh.
 [[ ! -f ~/powerlevel10k/config/p10k-lean.zsh ]] || source ~/powerlevel10k/config/p10k-lean.zsh
