@@ -24,11 +24,14 @@ set conceallevel=0 " Do not hide any characters
 
 "" Interface
 set title " Show currently edited file name in window title
-set wildmenu " Always show completion when possible
 set termguicolors " Make everything colored, might not work on older terms
 set laststatus=2 " Always show status lines, even in splits
-set scrolloff=2 " Show atleast 2 lines above and below the cursor
+set scrolloff=5 " Show atleast 5 lines above and below the cursor
 set sidescrolloff=5 " Show atleast 5 chars when scrolling to the side
+
+"" Completion
+set wildmenu " Always show completion when possible
+set completeopt=menu,menuone,noselect
 
 "" Indentation
 set nocindent " do not follow C rules for indentation
@@ -105,11 +108,11 @@ Plug 'Yggdroot/indentLine' " Shows different indicators depending on indentation
 Plug 'norcalli/nvim-colorizer.lua' " Highlight colors with their values
 
 " General syntax highlighting
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
 
 " General language plugins
 Plug 'puremourning/vimspector' " Debugger
-Plug 'neoclide/coc.nvim' " Autocompletion and more
+" Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
 " Python-specific plugins
 Plug 'numirias/semshi' " Better highlighting, run :UpdateRemotePlugins to activate it
@@ -289,9 +292,8 @@ lua require("hop").setup()
 let g:indentLine_char_list=['|', '¦', '┆', '┊'] "Indentation indicators
 
 "" Noice setup
-lua require("noice").setup()
+lua require("noice").setup({lsp = {override = {}}})
 
-"" Rainbow setup
 let g:rainbow_active = 1 "Always keep it active
 
 " Purple / Green / Blue / Yellow / Red

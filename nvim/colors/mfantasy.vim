@@ -1,13 +1,18 @@
+" vim:fileencoding=utf-8:foldmethod=marker
+
+": Metadata {{{
 set termguicolors
 set t_Co=256
 let g:colors_name = "mfantasy"
+": }}}
 
-" Background color
-hi Normal guibg=#300a24
+": Background color {{{
+hi Normal guibg=#1a1a1a
 hi link NormalFloat Normal
 hi link NormalNC Normal
+": }}}
 
-" Code highlighting
+": Code highlighting {{{
 
 hi comment guifg=Silver
 
@@ -48,15 +53,20 @@ hi link Debug Special
 
 hi Error guifg=Red guibg=White
 hi Todo guibg=Magenta guifg=Green
+": }}}
 
-" Pop menus colors
+": Pop menus colors {{{
 hi Pmenu guifg=Cyan guibg=#282c35
 hi PmenuSel guifg=Cyan guibg=#6b768f
 
-"" Coc specific colors
+": }}}
 
-" floating autocompleion menu
-hi link CocFloating Pmenu
+": Blankline specifics {{{
+highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine
+highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine
+highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine
+highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine
+highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine
+highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine
+": }}}
 
-" Inlined typehints
-hi link CocInlayHint Pmenu
