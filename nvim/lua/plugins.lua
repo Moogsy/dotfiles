@@ -26,7 +26,7 @@ return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 
     --: Essential plugins {{{
-    
+
     --: Multi languages {{{
 
     -- Autocompletion
@@ -39,8 +39,8 @@ return require("packer").startup(function(use)
     -- Syntax highlighting
     use({
         "nvim-treesitter/nvim-treesitter",
-        run = function() 
-            require('nvim-treesitter.install').update({ with_sync = true }) 
+        run = function()
+            require('nvim-treesitter.install').update({ with_sync = true })
         end,
     })
 
@@ -70,7 +70,7 @@ return require("packer").startup(function(use)
 
     -- Python
     use({"numirias/semshi"})
-    
+
     use({
         "mfussenegger/nvim-dap-python",
         requires = {"mfussenegger/nvim-dap"}
@@ -80,7 +80,7 @@ return require("packer").startup(function(use)
     --:}}}
 
     --:}}}
-        
+
 	--: Eye candy {{{
 
     -- Rainbow parenthesises
@@ -92,15 +92,15 @@ return require("packer").startup(function(use)
 
     -- FIXME: Loading those plugins silence any error when our config files are loaded
 
-    --[[ Notifications, and better command
+    -- Notifications, and better command
+    use("MunifTanjim/nui.nvim")
+    use("rcarriga/nvim-notify")
     use({
         "folke/noice.nvim",
         config = function() require("noice").setup() end,
 
         requires = {
-            "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
-        },
+       },
 
         lsp = {
             override = {
@@ -116,7 +116,7 @@ return require("packer").startup(function(use)
     -- Indicators for indentation
     use({
         "lukas-reineke/indent-blankline.nvim",
-        config = function() 
+        config = function()
             require("indent_blankline").setup({
                 space_char_blankline = " ",
                 show_current_context = true,
@@ -129,7 +129,7 @@ return require("packer").startup(function(use)
                     "IndentBlanklineIndent6",
                 },
 
-            }) 
+            })
         end,
     })
 
@@ -142,6 +142,12 @@ return require("packer").startup(function(use)
     --: }}}
 
     --: Navigation {{{
+    use({
+        "nvim-tree/nvim-tree.lua",
+        requires = {
+            "nvim-tree/nvim-web-devicons",
+        },
+    })
     use({
         "nvim-telescope/telescope.nvim",
         requires = {"nvim-lua/plenary.nvim"}

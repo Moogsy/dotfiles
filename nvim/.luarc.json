@@ -1,0 +1,30 @@
+{
+    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+    "Lua.workspace.checkThirdParty": false,
+    "Lua.workspace.library": [
+        "/home/moogs/.config/nvim",
+        "/home/moogs/.local/share/nvim/site",
+        "/home/moogs/.local/share/nvim/site/pack/packer/start/LuaSnip",
+        "/home/moogs/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
+        "/home/moogs/.local/share/nvim/site/pack/packer/start/friendly-snippets",
+        "/home/moogs/.local/share/nvim/site/pack/packer/start/hop.nvim",
+        "/home/moogs/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+        "/home/moogs/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+        "/home/moogs/.local/share/nvim/site/pack/packer/start/nvim-cmp",
+        "/home/moogs/.local/share/nvim/site/pack/packer/start/nvim-dap",
+        "/home/moogs/.local/share/nvim/site/pack/packer/start/nvim-dap-python",
+        "/home/moogs/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+        "/home/moogs/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+        "/home/moogs/.local/share/nvim/site/pack/packer/start/nvim-ts-rainbow",
+        "/home/moogs/.local/share/nvim/site/pack/packer/start/packer.nvim",
+        "/home/moogs/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+        "/home/moogs/.local/share/nvim/site/pack/packer/start/semshi",
+        "/home/moogs/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim",
+        "/home/moogs/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+        "/home/moogs/.local/share/nvim/site/pack/packer/start/vimspector",
+        "/usr/share/nvim/runtime",
+        "/lib/nvim",
+        "/home/moogs/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp/after",
+        "${3rd}/love2d/library"
+    ]
+}

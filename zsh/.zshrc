@@ -39,10 +39,6 @@ zstyle ':completion:*' verbose true
 
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-source ~/powerlevel10k/powerlevel10k.zsh-theme
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Shorten common commands
 alias q='exit'
@@ -69,6 +65,15 @@ alias novpnimag='nmcli c down vpn_ensimag'
 # Fixes cargo's failed to authenticate issue
 CARGO_NET_GIT_FETCH_WITH_CLI=true
 
+## Powerlevel10k (status prompt)
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 # To customize prompt, run `p10k configure` or edit ~/powerlevel10k/config/p10k-lean.zsh.
 [[ ! -f ~/powerlevel10k/config/p10k-lean.zsh ]] || source ~/powerlevel10k/config/p10k-lean.zsh
+
 source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+alias luamake=/luamake
+

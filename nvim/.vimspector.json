@@ -14,13 +14,22 @@
                 "program": "${file}",
                 "request": "launch",
                 "stopOnEntry": true,
-                "python": "${MyPythonPath}"
+                "python": "${MyPythonPath}",
+                "default": true
             },
 
             "breakpoints": {
-                "caught": "",
-                "uncaught": "",
-                "userUnhandled": ""
+                "caught": "N",
+                "uncaught": "Y",
+                "userUnhandled": "N"
+            }
+        },
+        "C": {
+            "adapter": "vscode-cpptools",
+            "configuration": {
+                "request": "launch",
+                "program": "${workspaceRoot}/a.out",
+                "stopAtEntry": true
             }
         }
     }

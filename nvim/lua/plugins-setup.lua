@@ -1,6 +1,5 @@
 -- vim:fileencoding=utf-8:foldmethod=marker
 --: Autocompletion (lspconfig + cmp + luasnip) {{{
-local lspconfig = require('lspconfig')
 local luasnip = require("luasnip")
 local cmp = require('cmp')
 
@@ -45,12 +44,6 @@ cmp.setup({
 
 --: }}}
 
---: Hop {{{
-local hop = require("hop")
-hop.setup()
-vim.keymap.set("n", "m", function() vim.cmd("HopAnywhere") end)
---: }}}
-
 --: Lspconfig {{{
 
 local opts = { noremap=true, silent=true }
@@ -63,20 +56,14 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     local bufopts = { noremap=true, silent=true, buffer=bufnr }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-    vim.keymap.set('n', '<space>wl', function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, bufopts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set('n', 'gtd', vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set('n', '<space>c', vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set('n', '<space>r', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
@@ -84,14 +71,25 @@ local lsp_flags = {
     -- this is the default in Nvim 0.7+
     debounce_text_changes = 150,
 }
+-- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+-- to add additional languages
+
+require('lspconfig')['bashls'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+}
+
 require('lspconfig')['pyright'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
 }
-require('lspconfig')['tsserver'].setup{
+
+require("lspconfig").clangd.setup({
     on_attach = on_attach,
     flags = lsp_flags,
-}
+})
+
+
 require('lspconfig')['rust_analyzer'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
@@ -101,6 +99,39 @@ require('lspconfig')['rust_analyzer'].setup{
     }
 }
 
+require('lspconfig').sumneko_lua.setup({
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT',
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = {'vim'},
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("", true),
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+                enable = false,
+            },
+        },
+    },
+})
+
+require('lspconfig')['tsserver'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+}
+--: }}}
+
+--: Hop {{{
+local hop = require("hop")
+hop.setup()
+vim.keymap.set("n", "m", function() vim.cmd("HopAnywhere") end)
 --: }}}
 
 --: Lualine {{{
@@ -114,6 +145,7 @@ vim.cmd("let g:semshi#error_sign = v:false")
 --: }}}
 
 --: Symbols outline {{{
+---@diagnostic disable-next-line: redefined-local
 local opts = {
     highlight_hovered_item = true,
     show_guides = true,
@@ -140,8 +172,8 @@ local opts = {
         code_actions = "a",
         fold = "h",
         unfold = "l",
-        fold_all = "W",
-        unfold_all = "E",
+        fold_all = "H",
+        unfold_all = "L",
         fold_reset = "R",
     },
     lsp_blacklist = {},
@@ -178,7 +210,7 @@ local opts = {
 require("symbols-outline").setup(opts)
 
 local opts = {noremap=true, silent=true}
-vim.keymap.set('n', '"o', function() vim.cmd("SymbolsOutline") end)
+vim.keymap.set('n', '"', function() vim.cmd("SymbolsOutline") end)
 
 
 --: }}}
@@ -215,22 +247,29 @@ require("nvim-treesitter.configs").setup({
 
 --: }}}
 
+--: Tree (files) {{{
+
+local nvim_tree = require("nvim-tree")
+nvim_tree.setup({})
+vim.keymap.set('n', 'é', nvim_tree.toggle)
+
+--: }}}
+
 --: Vimspector {{{
 
 -- Start and stop as needed
-vim.keymap.set('n', '<F5>', 
-function() 
-    local current_directory = vim.fn.expand("%:p:h")
-
-    vim.cmd("call vimspector#Continue()") 
-end)
-
+vim.keymap.set('n', '<F5>', function() vim.cmd("call vimspector#Continue()") end)
 vim.keymap.set('n', '<F17>', function() vim.cmd("call vimspector#Reset()") end)
 vim.keymap.set('n', '<F29>', function() vim.cmd("call vimspector#Pause()") end)
 
 -- Breakpoints related
-vim.keymap.set('n', '<F4>', function() vim.cmd("call vimspector#ToggleBreakpoints()") end)
+vim.keymap.set('n', '<F4>', function() vim.cmd("call vimspector#ToggleBreakpoint()") end)
 vim.keymap.set('n', '<F16>', function() vim.cmd("call vimspector#ListBreakpoints()") end)
+vim.keymap.set('n', '<F28>', function() vim.cmd("call vimspector#RunToCursor()") end)
+
+vim.keymap.set('n', '<F6>', function() vim.cmd("call vimspector#StepOver()") end)
+vim.keymap.set('n', '<F18>', function() vim.cmd("call vimspector#StepInto()") end)
+vim.keymap.set('n', '<F30>', function() vim.cmd("call vimspector#StepOut()") end)
 
 --: }}}
 
