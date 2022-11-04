@@ -62,6 +62,18 @@ alias ipy="ipython"
 alias vpnimag='nmcli c up vpn_ensimag'
 alias novpnimag='nmcli c down vpn_ensimag'
 
+# Extend path
+export PATH="$PATH:/home/$USER/.local/bin"
+
+# Add some colors to man pags
+export LESS_TERMCAP_mb=$'\e[1;32m'
+export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;31m'
+
 # Fixes cargo's failed to authenticate issue
 CARGO_NET_GIT_FETCH_WITH_CLI=true
 
@@ -75,5 +87,4 @@ CARGO_NET_GIT_FETCH_WITH_CLI=true
 
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
-alias luamake=/luamake
 

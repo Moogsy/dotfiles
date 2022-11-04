@@ -42,17 +42,13 @@ cmp.setup({
     },
 })
 
---: }}}
-
---: Lspconfig {{{
-
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr) -- client, bufnr
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     local bufopts = { noremap=true, silent=true, buffer=bufnr }
@@ -66,6 +62,19 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>r', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
+
+-- Hides virtual text diagnostics
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    float = { border = "single" },
+})
+
+-- In favour of diagnostic that appears on hover
+vim.api.nvim_create_autocmd(
+    "CursorHold",
+    { pattern = "*", command = [[ lua vim.diagnostic.open_float(nil, {scope = "line", severity_sort = true}) ]]}
+)
 
 local lsp_flags = {
     -- this is the default in Nvim 0.7+

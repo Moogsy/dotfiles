@@ -19,7 +19,6 @@ opt.conceallevel = 0
 opt.title = true
 opt.laststatus = 2
 opt.scrolloff = 5
-opt.sidescrolloff = 5
 
 -- Completion
 opt.wildmenu = true
@@ -42,14 +41,22 @@ opt.softtabstop = 4
 opt.expandtab = true
 opt.shiftround = true
 
--- Serch
+-- Search
 opt.hlsearch = true
 opt.is = true
 
 opt.ignorecase = true
 opt.smartcase = true
 
+-- Diagnostics
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    float = { border = "single" },
+})
 
-
+-- Fix some lsp issues, some language servers dislike backups
+opt.backup = false
+opt.writebackup = false
 
 

@@ -69,12 +69,12 @@ return require("packer").startup(function(use)
     use({"lervag/vimtex", ft = {"tex", }})
 
     -- Python
-    use({"numirias/semshi"})
-
-    use({
+    use({ -- Debugger
         "mfussenegger/nvim-dap-python",
         requires = {"mfussenegger/nvim-dap"}
     })
+
+    use("psf/black") -- Format
 
 
     --:}}}
