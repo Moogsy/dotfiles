@@ -71,10 +71,6 @@ vim.diagnostic.config({
 })
 
 -- In favour of diagnostic that appears on hover
-vim.api.nvim_create_autocmd(
-    "CursorHold",
-    { pattern = "*", command = [[ lua vim.diagnostic.open_float(nil, {scope = "line", severity_sort = true}) ]]}
-)
 
 local lsp_flags = {
     -- this is the default in Nvim 0.7+
@@ -88,6 +84,7 @@ require('lspconfig')['bashls'].setup{
     flags = lsp_flags,
 }
 
+-- run: npm i -g pyright
 require('lspconfig')['pyright'].setup{
     on_attach = on_attach,
     flags = lsp_flags,

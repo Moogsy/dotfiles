@@ -69,6 +69,8 @@ return require("packer").startup(function(use)
     use({"lervag/vimtex", ft = {"tex", }})
 
     -- Python
+    use("numirias/semshi")
+
     use({ -- Debugger
         "mfussenegger/nvim-dap-python",
         requires = {"mfussenegger/nvim-dap"}
@@ -76,6 +78,8 @@ return require("packer").startup(function(use)
 
     use("psf/black") -- Format
 
+    -- Kitty config files
+    use("fladson/vim-kitty")
 
     --:}}}
 
@@ -156,6 +160,16 @@ return require("packer").startup(function(use)
     -- Jump anywhere
     use("phaazon/hop.nvim")
 
+    -- Change delimiters
+    use({
+        "kylechui/nvim-surround",
+        tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+        config = function()
+            require("nvim-surround").setup({
+                -- Configuration here, or leave empty to use defaults
+            })
+        end
+    })
     --: }}}
 
     -- Automatically install packer if needed
