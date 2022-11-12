@@ -42,6 +42,10 @@ cmp.setup({
     },
 })
 
+--: Bufferline {{{
+require("bufferline").setup({})
+--: }}}
+
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
@@ -138,6 +142,21 @@ require('lspconfig')['tsserver'].setup{
 local hop = require("hop")
 hop.setup()
 vim.keymap.set("n", "m", function() vim.cmd("HopAnywhere") end)
+--: }}}
+
+--: Lint {{{
+lint = require("lint")
+
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  callback = function()
+    require("lint").try_lint()
+  end,
+})
+
+lint.linters_by_ft = {
+    python = {'pylint', }
+}
+
 --: }}}
 
 --: Lualine {{{

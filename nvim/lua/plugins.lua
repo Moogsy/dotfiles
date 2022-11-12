@@ -61,6 +61,9 @@ return require("packer").startup(function(use)
     -- Debugger
     use("puremourning/vimspector")
 
+    -- Linter
+    use('mfussenegger/nvim-lint')
+
     --: }}}
 
     --: Language specific {{{
@@ -142,6 +145,9 @@ return require("packer").startup(function(use)
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     })
+
+    -- Tab pages for buffers
+    use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
 
     --: }}}
 

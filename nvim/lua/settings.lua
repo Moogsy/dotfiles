@@ -6,6 +6,7 @@ opt.syntax = "on"
 vim.cmd("colorscheme mfantasy")
 
 -- Misc
+opt.mouse = nil
 opt.pyx = 3
 opt.encoding = "utf-8"
 opt.updatetime = 250
