@@ -102,21 +102,7 @@ return require("packer").startup(function(use)
     -- Notifications, and better command
     use("MunifTanjim/nui.nvim")
     use("rcarriga/nvim-notify")
-    use({
-        "folke/noice.nvim",
-        config = function() require("noice").setup() end,
-
-        requires = {
-       },
-
-        lsp = {
-            override = {
-                ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                ["vim.lsp.util.stylize_markdown"] = true,
-                ["cmp.entry.get_documentation"] = true,
-            }
-        }
-    })
+    use("folke/noice.nvim")
 
     --]]
 

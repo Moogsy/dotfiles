@@ -10,6 +10,7 @@ opt.mouse = nil
 opt.pyx = 3
 opt.encoding = "utf-8"
 opt.updatetime = 250
+opt.clipboard = "unnamedplus"
 
 -- Readability
 opt.number = true
