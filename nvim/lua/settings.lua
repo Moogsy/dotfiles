@@ -1,9 +1,7 @@
 local opt=vim.opt
 
--- Colorscheme
+-- Setting up colors
 opt.termguicolors = true
-opt.syntax = "on"
-vim.cmd("colorscheme mfantasy")
 
 -- Misc
 opt.mouse = nil
@@ -37,9 +35,9 @@ opt.showmatch = true
 opt.matchtime = 1
 
 -- Tabs
-opt.tabstop = 4 
-opt.shiftwidth = 4 
-opt.softtabstop = 4 
+opt.tabstop = 4
+opt.shiftwidth = 4
+opt.softtabstop = 4
 opt.expandtab = true
 opt.shiftround = true
 
@@ -50,15 +48,7 @@ opt.is = true
 opt.ignorecase = true
 opt.smartcase = true
 
--- Diagnostics
-vim.diagnostic.config({
-    virtual_text = false,
-    signs = true,
-    float = { border = "single" },
-})
-
--- Fix some lsp issues, some language servers dislike backups
+-- Fix some lsp issues since some language servers dislike backups
 opt.backup = false
 opt.writebackup = false
-
 
