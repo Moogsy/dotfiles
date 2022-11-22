@@ -1,7 +1,7 @@
 local opts = { noremap = true, silent = true }
 local keymap = vim.keymap.set
 
--- General
+-- Builtin Lsp
 keymap('n', '(', vim.diagnostic.goto_prev, opts)
 keymap('n', ')', vim.diagnostic.goto_next, opts)
 
@@ -14,6 +14,12 @@ keymap('n', '<space>i', vim.lsp.buf.implementation, opts)
 keymap('n', '<space>k', vim.lsp.buf.hover, opts)
 keymap('n', '<space>n', vim.lsp.buf.rename, opts)
 keymap('n', '<space>r', vim.lsp.buf.references, opts)
+
+-- Terminal
+keymap('t', '<Esc>', [[ <C-\><C-n> ]], opts)
+
+-- That overlaps with Telescope's usual prefix
+keymap('n', 'tt', function() require("toggleterm").toggle(1) end, opts)
 
 -- LspLines
 keymap("n", "<space>l", require("lsp_lines").toggle, opts)

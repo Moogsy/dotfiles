@@ -36,9 +36,8 @@ return require("packer").startup(function(use)
 
     -- UI Redesigns
     use("MunifTanjim/nui.nvim") -- Base plugin
-    -- use("rcarriga/nvim-notify") -- Notifications
+    use("rcarriga/nvim-notify") -- Notifications
     use("folke/noice.nvim") -- Redesign for the command line
-    --
 
     -- Fix colorschemes that don't support new colors yet
     use("folke/lsp-colors.nvim")
@@ -70,7 +69,7 @@ return require("packer").startup(function(use)
     use("fladson/vim-kitty") -- Highlighting for kitty config files
 
     -- Python related
-    -- use("numirias/semshi") -- Highlighting
+    use("numirias/semshi") -- Highlighting
     use("psf/black") -- Format
 
     -- Snippets handler 
@@ -87,9 +86,9 @@ return require("packer").startup(function(use)
     use("cljoly/telescope-repo.nvim") -- Go to repos
     use("airblade/vim-rooter") -- Change root dir
 
-
     -- Navigation
     use("phaazon/hop.nvim") -- Within current buffers
+    use("akinsho/toggleterm.nvim") -- Dynamic terminal
 
     -- Fast editing
     use({"kylechui/nvim-surround", tag = "*" })

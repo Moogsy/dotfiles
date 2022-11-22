@@ -375,6 +375,10 @@ require("noice").setup({
 
 --: }}}
 
+-- Rooter {{{
+vim.g['rooter_cd_cmd'] = 'lcd'
+-- }}}
+
 --: Symbols outline {{{
 ---@diagnostic disable-next-line: redefined-local
 local opts = {
@@ -443,6 +447,13 @@ require("symbols-outline").setup(opts)
 
 
 --: }}}
+
+-- Toggleterm {{{
+require("toggleterm").setup({
+    direction = "float",
+    border = "curved",
+})
+-- }}}
 
 --: Treesitter + Rainbow {{{
 require('nvim-treesitter.install').update({ with_sync = true })
