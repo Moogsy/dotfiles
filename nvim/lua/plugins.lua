@@ -19,8 +19,11 @@ return require("packer").startup(function(use)
 	-- Plugins manager
 	use("wbthomason/packer.nvim")
 
+    -- LSP + DAP manager
+    use("williamboman/mason.nvim")
+
     -- Colorscheme
-    use('bluz71/vim-moonfly-colors')
+    use {'wuelnerdotexe/vim-enfocado'}
 
     -- Lspconfig's family
     use({"neovim/nvim-lspconfig"}) -- Base lsp
@@ -34,10 +37,11 @@ return require("packer").startup(function(use)
     use("nvim-treesitter/nvim-treesitter") -- General highlighting
     use("p00f/nvim-ts-rainbow") -- Rainbow parenthesises
 
-    -- UI Redesigns
+    -- UI eye candy
     use("MunifTanjim/nui.nvim") -- Base plugin
     use("rcarriga/nvim-notify") -- Notifications
     use("folke/noice.nvim") -- Redesign for the command line
+    use("nvim-zh/colorful-winsep.nvim") -- Add some coloured borders
 
     -- Fix colorschemes that don't support new colors yet
     use("folke/lsp-colors.nvim")
@@ -68,6 +72,7 @@ return require("packer").startup(function(use)
     use({"lervag/vimtex", ft = {"tex", }}) -- Mappings + Syntax for LaTeX
     use("fladson/vim-kitty") -- Highlighting for kitty config files
 
+    -- LateX specific
     -- Python related
     use("numirias/semshi") -- Highlighting
     use("psf/black") -- Format
@@ -84,7 +89,8 @@ return require("packer").startup(function(use)
     use({"nvim-telescope/telescope.nvim", requires = {"nvim-lua/plenary.nvim"}})
     use("Acksld/nvim-neoclip.lua") -- Navigate throught old yanked text
     use("cljoly/telescope-repo.nvim") -- Go to repos
-    use("airblade/vim-rooter") -- Change root dir
+    use("airblade/vim-rooter") -- Change root dir (utils for telescope-repo)
+    use("debugloop/telescope-undo.nvim") -- Navigate throught past states
 
     -- Navigation
     use("phaazon/hop.nvim") -- Within current buffers

@@ -52,7 +52,7 @@ cmp.setup({
 
 vim.api.nvim_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-local servers = { "bashls", "pyright", "rust_analyzer", "tsserver" }
+local servers = { "bashls", "pyright", "rust_analyzer", "texlab" }
 
 for _, lsp in pairs(servers) do
     require("lspconfig")[lsp].setup({
@@ -86,6 +86,10 @@ require('lspconfig').sumneko_lua.setup({
 
 --: Bufferline {{{
 require("bufferline").setup({})
+--: }}}
+
+--: Colourful Winsep {{{
+require("colorful-winsep").setup()
 --: }}}
 
 --: Dap {{{
@@ -139,13 +143,12 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 })
 
 lint.linters_by_ft = {
-    python = { 'pylint', }
 }
 
 --: }}}
 
 --: Lualine {{{
-require("lualine").setup({ options = { theme = "horizon" } })
+require("lualine").setup({ options = { theme = "enfocado" } })
 --: }}}
 
 --: LuaSnip {{{
@@ -162,17 +165,23 @@ vim.diagnostic.config({
 
 --: }}}
 
---: Moonfly + Delayed IdentBlankline setup {{{
-vim.cmd("colorscheme moonfly")
+--: Mason {{{
+require("mason").setup()
+--: }}}
 
--- Moonfly clears those custom highlights, add them after the clear
+--: Enfocado color theme + Delayed IdentBlankline setup {{{
+
+vim.g.enfocado_style = "neon"
+vim.opt.background = "dark"
+vim.cmd("colorscheme enfocado")
+
+-- Some colorschemes clears those custom highlights, add them after the clear
 vim.cmd("highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine")
 vim.cmd("highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine")
 vim.cmd("highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine")
 vim.cmd("highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine")
 vim.cmd("highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine")
 vim.cmd("highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine")
-
 
 --: }}}
 
@@ -475,4 +484,8 @@ require("nvim-treesitter.configs").setup({
 
 --: TelescopeRepo {{{
 require("telescope").load_extension("repo")
+--: }}}
+
+--: TelescopeUndo {{{
+require("telescope").load_extension("undo")
 --: }}}

@@ -48,6 +48,8 @@ keymap('n', 'tn', telescope.extensions.neoclip.default, opts) -- registers
 keymap('n', 'tr', function() vim.cmd("Telescope repo list") end, opts) -- Git repos
 keymap('n', 'ts', tbuiltins.spell_suggest, opts) -- spell correction
 keymap('n', 'tv', tbuiltins.lsp_document_symbols, opts) -- variables
+keymap('n', 'tl', tbuiltins.live_grep, opts) -- Grep and show matches at the same time
+keymap('n', 'tu', function() vim.cmd("Telescope undo") end, opts) -- Shows undo tree
 
 -- Dap
 local dap = require("dap")
