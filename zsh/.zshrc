@@ -77,14 +77,3 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 # Fixes cargo's failed to authenticate issue
 CARGO_NET_GIT_FETCH_WITH_CLI=true
 
-## Powerlevel10k (status prompt)
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# To customize prompt, run `p10k configure` or edit ~/powerlevel10k/config/p10k-lean.zsh.
-[[ ! -f ~/powerlevel10k/config/p10k-lean.zsh ]] || source ~/powerlevel10k/config/p10k-lean.zsh
-
-source ~/powerlevel10k/powerlevel10k.zsh-theme
-
-
