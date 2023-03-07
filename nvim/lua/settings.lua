@@ -52,3 +52,5 @@ opt.smartcase = true
 opt.backup = false
 opt.writebackup = false
 
+-- Vimtex
+vim.g.vimtex_view_method = "mupdf"

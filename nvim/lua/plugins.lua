@@ -32,17 +32,35 @@ return require("packer").startup(function(use)
     use("onsails/lspkind.nvim") -- Show types icons during autocompletion
     use({'simrat39/symbols-outline.nvim'}) -- Symbols in current file
     use("https://git.sr.ht/~whynothugo/lsp_lines.nvim") -- Virtual lines diagnostics
-
+    use({"SmiteshP/nvim-navic", requires = "neovim/nvim-lspconfig"})
     -- Treesitter's family
     use("nvim-treesitter/nvim-treesitter") -- General highlighting
     use("p00f/nvim-ts-rainbow") -- Rainbow parenthesises
-
+    use({
+    "utilyre/barbecue.nvim",
+    tag = "*",
+    requires = {
+        "SmiteshP/nvim-navic",
+        "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    after = "nvim-web-devicons", -- keep this if you're using NvChad
+    config = function()
+        require("barbecue").setup()
+    end,
+    })
     -- UI eye candy
     use("MunifTanjim/nui.nvim") -- Base plugin
     use("rcarriga/nvim-notify") -- Notifications
     use("folke/noice.nvim") -- Redesign for the command line
     use("nvim-zh/colorful-winsep.nvim") -- Add some coloured borders
-
+    use("xiyaowong/nvim-transparent") -- Transparent background
+    use({
+    "giusgad/pets.nvim",
+    requires = {
+        "edluffy/hologram.nvim",
+        "MunifTanjim/nui.nvim",
+    }
+    })
     -- Fix colorschemes that don't support new colors yet
     use("folke/lsp-colors.nvim")
 
@@ -69,13 +87,19 @@ return require("packer").startup(function(use)
     use('mfussenegger/nvim-lint')
 
     -- Language specific plugins
-    use({"lervag/vimtex", ft = {"tex", }}) -- Mappings + Syntax for LaTeX
+
+    -- LaTeX Specific
+    use("lervag/vimtex") -- Mappings + Syntax for LaTeX
+
+    -- Kitty config files
     use("fladson/vim-kitty") -- Highlighting for kitty config files
 
-    -- LateX specific
     -- Python related
     use("numirias/semshi") -- Highlighting
     use("psf/black") -- Format
+
+    -- Markdown files
+    use {"ellisonleao/glow.nvim"}
 
     -- Snippets handler 
     -- FIXME: Those snippets aren't loaded
@@ -98,6 +122,8 @@ return require("packer").startup(function(use)
 
     -- Fast editing
     use({"kylechui/nvim-surround", tag = "*" })
+    use("windwp/nvim-autopairs")
+
 
     -- Automatically install packer if needed
     if is_first_launch then

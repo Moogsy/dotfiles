@@ -53,14 +53,20 @@ cmp.setup({
 vim.api.nvim_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
 local servers = { "bashls", "pyright", "rust_analyzer", "texlab" }
+local navic = require("nvim-navic")
 
 for _, lsp in pairs(servers) do
     require("lspconfig")[lsp].setup({
         flags = { debounce_text_changes = 150 },
+        on_attach = function(client, bufnr)
+            if client.server_capabilities.documentSymbolProvider then
+                navic.attach(client, bufnr)
+            end
+        end,
     })
 end
 
-require('lspconfig').sumneko_lua.setup({
+require('lspconfig').lua_ls.setup({
     settings = {
         Lua = {
             runtime = {
@@ -82,6 +88,10 @@ require('lspconfig').sumneko_lua.setup({
     },
 })
 
+--: }}}
+
+--: Autopairs {{{
+require("nvim-autopairs").setup({})
 --: }}}
 
 --: Bufferline {{{
@@ -382,8 +392,16 @@ require("noice").setup({
     format = {}, --- @see section on formatting
 })
 
+require("notify").setup({background_colour = "#000000"})
+
 --: }}}
 
+--: Pets {{{
+require("pets").setup({
+    default_pet = "cat",
+    default_style = "brown"
+})
+--}}}
 -- Rooter {{{
 vim.g['rooter_cd_cmd'] = 'lcd'
 -- }}}
@@ -464,6 +482,25 @@ require("toggleterm").setup({
 })
 -- }}}
 
+--: Transparent {{{
+require("transparent").setup({
+  enable = true, -- boolean: enable transparent
+  extra_groups = { -- table/string: additional groups that should be cleared
+    -- In particular, when you set it to 'all', that means all available groups
+
+    -- example of akinsho/nvim-bufferline.lua
+    "BufferLineTabClose",
+    "BufferlineBufferSelected",
+    "BufferLineFill",
+    "BufferLineBackground",
+    "BufferLineSeparator",
+    "BufferLineIndicatorSelected",
+  },
+  exclude = {}, -- table: groups you don't want to clear
+})
+
+--: }}}
+
 --: Treesitter + Rainbow {{{
 require('nvim-treesitter.install').update({ with_sync = true })
 
@@ -489,3 +526,7 @@ require("telescope").load_extension("repo")
 --: TelescopeUndo {{{
 require("telescope").load_extension("undo")
 --: }}}
+
+-- Vimtex {{{
+vim.g.vimtex_view_method = "mupdf"
+-- }}}
