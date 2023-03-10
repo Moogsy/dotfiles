@@ -23,8 +23,7 @@ return require("packer").startup(function(use)
     use("williamboman/mason.nvim")
 
     -- Colorscheme
-    use {'wuelnerdotexe/vim-enfocado'}
-
+    use {"loctvl842/monokai-pro.nvim"}
     -- Lspconfig's family
     use({"neovim/nvim-lspconfig"}) -- Base lsp
     use('hrsh7th/nvim-cmp') -- Autocompletion plugin
@@ -45,7 +44,9 @@ return require("packer").startup(function(use)
     },
     after = "nvim-web-devicons", -- keep this if you're using NvChad
     config = function()
-        require("barbecue").setup()
+        require("barbecue").setup({
+            theme = 'monokai-pro'
+        })
     end,
     })
     -- UI eye candy
@@ -97,9 +98,6 @@ return require("packer").startup(function(use)
     -- Python related
     use("numirias/semshi") -- Highlighting
     use("psf/black") -- Format
-
-    -- Markdown files
-    use {"ellisonleao/glow.nvim"}
 
     -- Snippets handler 
     -- FIXME: Those snippets aren't loaded

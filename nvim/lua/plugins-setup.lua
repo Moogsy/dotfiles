@@ -52,7 +52,7 @@ cmp.setup({
 
 vim.api.nvim_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-local servers = { "bashls", "pyright", "rust_analyzer", "texlab" }
+local servers = { "bashls", "pyright", "rust_analyzer", "texlab", "clangd" }
 local navic = require("nvim-navic")
 
 for _, lsp in pairs(servers) do
@@ -158,7 +158,7 @@ lint.linters_by_ft = {
 --: }}}
 
 --: Lualine {{{
-require("lualine").setup({ options = { theme = "enfocado" } })
+require("lualine").setup({ options = { theme = "monokai-pro" } })
 --: }}}
 
 --: LuaSnip {{{
@@ -181,9 +181,8 @@ require("mason").setup()
 
 --: Enfocado color theme + Delayed IdentBlankline setup {{{
 
-vim.g.enfocado_style = "neon"
 vim.opt.background = "dark"
-vim.cmd("colorscheme enfocado")
+vim.cmd("colorscheme monokai-pro")
 
 -- Some colorschemes clears those custom highlights, add them after the clear
 vim.cmd("highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine")
@@ -195,8 +194,21 @@ vim.cmd("highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine")
 
 --: }}}
 
+--: Monokai Pro {{{
+require("monokai-pro").setup({
+    transparent_background = true,
+    terminal_colors = true,
+    devicons = true,
+    italic_comments = true,
+    filter = "classic",
+})
+--}}}
 --: Neoclip {{{
-require("neoclip").setup({})
+require("neoclip").setup({
+    defaults = {
+      borderchars = { "█", " ", "▀", "█", "█", " ", " ", "▀" },
+    }
+})
 require("telescope").load_extension("neoclip")
 
 --: }}}
@@ -402,6 +414,7 @@ require("pets").setup({
     default_style = "brown"
 })
 --}}}
+
 -- Rooter {{{
 vim.g['rooter_cd_cmd'] = 'lcd'
 -- }}}
@@ -477,8 +490,15 @@ require("symbols-outline").setup(opts)
 
 -- Toggleterm {{{
 require("toggleterm").setup({
-    direction = "float",
+    direction = "vertical",
     border = "curved",
+    size = function(term)
+        if term.direction == "vertical" then
+            return vim.o.columns * 0.5
+        elseif term.direction == "horizontal" then
+            return vim.o.lines * 0.3
+        end
+    end,
 })
 -- }}}
 
