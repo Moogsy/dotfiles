@@ -34,7 +34,7 @@ return require("packer").startup(function(use)
     use({"SmiteshP/nvim-navic", requires = "neovim/nvim-lspconfig"})
     -- Treesitter's family
     use("nvim-treesitter/nvim-treesitter") -- General highlighting
-    use("p00f/nvim-ts-rainbow") -- Rainbow parenthesises
+    use("HiPhish/nvim-ts-rainbow2")
     use({
     "utilyre/barbecue.nvim",
     tag = "*",

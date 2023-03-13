@@ -52,6 +52,9 @@ cmp.setup({
 
 vim.api.nvim_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+--: }}}
+
+--: Language servers {{{
 local servers = { "bashls", "pyright", "rust_analyzer", "texlab", "clangd" }
 local navic = require("nvim-navic")
 
@@ -203,6 +206,7 @@ require("monokai-pro").setup({
     filter = "classic",
 })
 --}}}
+
 --: Neoclip {{{
 require("neoclip").setup({
     defaults = {
@@ -521,7 +525,7 @@ require("transparent").setup({
 
 --: }}}
 
---: Treesitter + Rainbow {{{
+--: Treesitter + Rainbow indentation / parenthesis {{{
 require('nvim-treesitter.install').update({ with_sync = true })
 
 require("nvim-treesitter.configs").setup({
@@ -531,8 +535,7 @@ require("nvim-treesitter.configs").setup({
 
     rainbow = {
         enable = true,
-        extended_mode = true,
-        max_file_lines = nil,
+        strategy = require("ts-rainbow.strategy.global"),
         colors = { "#E0B0FF", "#90EE90", "#ADD8E6", "#FFFF00", "#FF0000" }
     }
 })
