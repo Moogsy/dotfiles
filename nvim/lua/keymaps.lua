@@ -2,7 +2,7 @@ local opts = { noremap = true, silent = true }
 local keymap = vim.keymap.set
 
 -- Builtin Lsp
-keymap('n', '(', vim.diagnostic.goto_prev, opts)
+keymap('n', '(', vim.diagnostic.goto_prev, opts, "Go to preious diagnostic")
 keymap('n', ')', vim.diagnostic.goto_next, opts)
 
 keymap('n', '<space>D', vim.lsp.buf.type_definition, opts)
@@ -26,7 +26,7 @@ keymap("n", "<space>l", require("lsp_lines").toggle, opts)
 
 -- Hop
 keymap("n", "mc", function() vim.cmd("HopAnywhereCurrentLine") end, opts)
-keymap("n", "mm", function() vim.cmd("HopAnywhere") end, opts)
+keymap("n", "ma", function() vim.cmd("HopAnywhere") end, opts)
 keymap('n', 'ml', function() vim.cmd("HopLine") end, opts)
 keymap('n', 'mp', function() vim.cmd("HopPattern") end, opts)
 keymap('n', 'mw', function() vim.cmd("HopWord") end, opts)
@@ -62,4 +62,10 @@ keymap('n', '<F4>', dap.toggle_breakpoint, opts)
 keymap('n', '<F6>', dap.step_over, opts)
 keymap('n', '<F7>', dap.step_into, opts)
 keymap('n', '<F8>', dap.step_out, opts)
+
+-- Papyrus
+keymap('n', '<space>pc', function() vim.cmd("PapyrusCompile") end, opts)
+keymap('n', '<space>pa', function() vim.cmd("PapyrusAutoCompile") end, opts)
+keymap('n', '<space>pv', function() vim.cmd("PapyrusView") end, opts)
+keymap('n', '<space>ps', function() vim.cmd("PapyrusStart") end, opts)
 

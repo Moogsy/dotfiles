@@ -55,7 +55,7 @@ vim.api.nvim_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 --: }}}
 
 --: Language servers {{{
-local servers = { "bashls", "pyright", "rust_analyzer", "texlab", "clangd" }
+local servers = { "bashls", "pyright", "rust_analyzer", "texlab", "clangd", "r-languageserver" }
 local navic = require("nvim-navic")
 
 for _, lsp in pairs(servers) do
@@ -182,7 +182,7 @@ vim.diagnostic.config({
 require("mason").setup()
 --: }}}
 
---: Enfocado color theme + Delayed IdentBlankline setup {{{
+--: Monokai color theme + Delayed IdentBlankline setup {{{
 
 vim.opt.background = "dark"
 vim.cmd("colorscheme monokai-pro")
@@ -419,6 +419,11 @@ require("pets").setup({
 })
 --}}}
 
+--:: Papyrus {{{
+vim.g.papyrus_latex_engine = 'latexmk'
+vim.g.papyrus_viewer = 'mupdf'
+
+--}}}
 -- Rooter {{{
 vim.g['rooter_cd_cmd'] = 'lcd'
 -- }}}

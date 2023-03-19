@@ -89,6 +89,9 @@ return require("packer").startup(function(use)
 
     -- Language specific plugins
 
+    -- Markdown specific
+    use("abeleinin/papyrus")
+
     -- LaTeX Specific
     use("lervag/vimtex") -- Mappings + Syntax for LaTeX
 
