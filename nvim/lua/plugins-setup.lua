@@ -55,7 +55,7 @@ vim.api.nvim_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 --: }}}
 
 --: Language servers {{{
-local servers = { "bashls", "pyright", "rust_analyzer", "texlab", "clangd", "r-languageserver" }
+local servers = { "bashls", "pyright", "rust_analyzer", "texlab", "clangd" }
 local navic = require("nvim-navic")
 
 for _, lsp in pairs(servers) do
