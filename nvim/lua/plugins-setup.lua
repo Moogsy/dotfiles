@@ -55,7 +55,7 @@ vim.api.nvim_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 --: }}}
 
 --: Language servers {{{
-local servers = { "bashls", "pyright", "rust_analyzer", "texlab", "clangd", "r-languageserver" }
+local servers = { "bashls", "pyright", "rust_analyzer", "texlab", "clangd", }
 local navic = require("nvim-navic")
 
 for _, lsp in pairs(servers) do
@@ -513,7 +513,6 @@ require("toggleterm").setup({
 
 --: Transparent {{{
 require("transparent").setup({
-  enable = true, -- boolean: enable transparent
   extra_groups = { -- table/string: additional groups that should be cleared
     -- In particular, when you set it to 'all', that means all available groups
 
@@ -525,7 +524,6 @@ require("transparent").setup({
     "BufferLineSeparator",
     "BufferLineIndicatorSelected",
   },
-  exclude = {}, -- table: groups you don't want to clear
 })
 
 --: }}}

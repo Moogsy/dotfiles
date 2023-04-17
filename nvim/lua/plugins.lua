@@ -99,7 +99,6 @@ return require("packer").startup(function(use)
     use("fladson/vim-kitty") -- Highlighting for kitty config files
 
     -- Python related
-    use("numirias/semshi") -- Highlighting
     use("psf/black") -- Format
 
     -- Snippets handler 
